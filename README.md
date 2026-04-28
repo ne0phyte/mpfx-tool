@@ -1,8 +1,10 @@
 # mpfx-tool
 
-Firmware patcher and flasher for the Numark Mixtrack Platinum FX DJ controller.
+Firmware patcher and flasher for the Numark Mixtrack Platinum FX DJ controller running on Linux.
 
 Allows patching out the "Fader Cuts" pad mode. No more crossfader movements, just MIDI note on/off messages so you can freely remap all performance pads.
+
+The patch is only valid for **firmware v1.10**. Any other version will be rejected.
 
 ---
 
@@ -12,19 +14,11 @@ Allows patching out the "Fader Cuts" pad mode. No more crossfader movements, jus
 
 ---
 
-## What it does
-
-`mpfx-tool patch` applies an unofficial firmware patch that removes the fader cuts crossfader automation from pad mode. Pad notes still fire normally.
-
-The patch is only valid for **firmware v1.10**. Any other version will be rejected.
-
----
-
 ## Requirements
 
 - Linux
-- Go 1.22+ (`golang`)
-- `7zip`
+- 7zip
+- Go 1.22+ (only for building from source)
 
 *Arch*: `pacman -S golang 7zip`
 
@@ -32,7 +26,11 @@ The patch is only valid for **firmware v1.10**. Any other version will be reject
 
 *Fedora*: `dnf install golang 7zip`
 
----
+## Installation
+
+Download the the latest [release](https://github.com/ne0phyte/mpfx-tool/releases).
+
+Or build it yourself. You need `golang` and then simply run: `go build .`
 
 ## Usage
 
@@ -44,7 +42,7 @@ Run the `get_firmware_file.sh` script. It downloads the 1.10 Update and extracts
 ./get_firmware_file.sh
 ```
 
-### 2. Build the tool
+### 2. Build the tool [OPTIONAL]
 
 ```sh
 go build .
@@ -62,9 +60,9 @@ This verifies the file against the known v1.10 MD5, applies the patch, and write
 
 Put the controller into flash mode first:
 
-1. Hold **SHIFT** on the controller
-2. Connect USB while holding SHIFT
-3. Release SHIFT after ~2 seconds
+1. Hold **both headphone cue buttons** on the controller
+2. Connect USB while holding
+3. Release after ~2 seconds
 
 Then flash:
 
